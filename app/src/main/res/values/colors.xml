@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="material_dynamic_primary80">#76D1FF</color>
     <color name="holo_orange_dark">#FF8800</color>
+    <color name="orange">#F1C903</color>
     <color name="system_accent2_200">#B5CAD7</color>
 
 </resources>

@@ -2,7 +2,10 @@ package com.trialapplication.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +22,7 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
 
     private FragmentManager fragmentManager;
     private ActivityMain4Binding binding;
+    private LinearLayout postContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,33 +41,31 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.home:
-                     openFragment(new home_fragment());
-                    break;
                 case R.id.create:
-                     openFragment(new create_post());
+                    createPostFragment();
+
                     break;
                 case R.id.posts:
-                     openFragment(new yourpost());
+                    openFragment(new yourpost());
                     break;
             }
             return true;
         });
 
         fragmentManager = getSupportFragmentManager();
-        openFragment(new home_fragment());
+        postContainer = findViewById(R.id.post_container);
+        openFragment(new post_fragment());
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Intent intent=new Intent(MainActivity4.this,MainActivity.class);
+                Intent intent = new Intent(MainActivity4.this, MainActivity.class);
                 startActivity(intent);
-                // Start MainActivity or the appropriate activity
                 break;
             case R.id.settings:
-                Intent intent1=new Intent(MainActivity4.this,settings.class);
+                Intent intent1 = new Intent(MainActivity4.this, settings.class);
                 startActivity(intent1);
                 break;
         }
@@ -84,5 +86,17 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame1, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void createPostFragment() {
+        View postView = LayoutInflater.from(this).inflate(R.layout.fragment_post_fragment, null);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(0, 0, 0, 16);
+
+        postView.setLayoutParams(layoutParams);
+        postContainer.addView(postView);
     }
 }

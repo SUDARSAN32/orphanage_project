@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "673587781646",
+    "project_id": "orphanlink-a6c6c",
+    "storage_bucket": "orphanlink-a6c6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673587781646:android:618ac2edfbca6a61431c5f",
+        "android_client_info": {
+          "package_name": "com.trialapplication.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCrtyabMiKWw9q-4WJxZMrc1LOpk3EdIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

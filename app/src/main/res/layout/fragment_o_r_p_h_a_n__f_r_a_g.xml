@@ -15,7 +15,7 @@
         android:layout_width="101dp"
         android:layout_height="49dp"
         android:fontFamily="@font/baloo"
-        android:text="ADDRESS"
+        android:text="ophanage  id"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#FDFAFA"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +91,7 @@
         android:layout_height="39dp"
         android:background="@drawable/box"
         android:ems="10"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
         android:layout_height="39dp"
         android:background="@drawable/box"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:paddingStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +150,7 @@
         android:layout_width="148dp"
         android:layout_height="48dp"
         android:background="@drawable/box"
-        android:backgroundTint="#F8D528"
+        android:backgroundTint="#FFE60D"
         android:text="SUBMIT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,12 +181,24 @@
         android:background="@drawable/box"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801" />
+        app:layout_constraintVertical_bias="0.801"  />
+
+    <EditText
+        android:id="@+id/fun"
+        android:layout_width="33dp"
+        android:layout_height="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.989"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
