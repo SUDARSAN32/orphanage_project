@@ -45,7 +45,7 @@ public class Broadcast_receiver extends BroadcastReceiver {
             if (isConnected) {
                 Toast.makeText(context, "Internet is available", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "No internet access", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Internet is available", Toast.LENGTH_SHORT).show();
             }
         }
     }

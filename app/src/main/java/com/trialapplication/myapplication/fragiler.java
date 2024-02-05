@@ -56,13 +56,28 @@ public class fragiler extends SQLiteOpenHelper {
             return true;
         }
     }
-    // Inside the fragiler class
     public boolean deleteRecord(String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] whereArgs = {phone};
-        int rowsAffected = db.delete(Table_name, col3 + "=?", whereArgs);
-        return rowsAffected > 0;
+
+        try {
+            int rowsAffected = db.delete(Table_name, col3 + "=?", whereArgs);
+
+            if (rowsAffected > 0) {
+                Log.d("fragiler", "Record deleted successfully");
+                return true;
+            } else {
+                Log.e("fragiler", "No record deleted");
+                return false;
+            }
+        } catch (Exception e) {
+            Log.e("fragiler", "Error deleting record: " + e.getMessage());
+            return false;
+        } finally {
+            db.close();
+        }
     }
+
 
     public List<Record> getAllRecords() {
         List<Record> records = new ArrayList<>();

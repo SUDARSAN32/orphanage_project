@@ -30,19 +30,6 @@ public class RecordFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_record, container, false);
-        EditText nameTextView = view.findViewById(R.id.name_box1);
-        EditText itemNameTextView = view.findViewById(R.id.box1);
-        EditText phoneTextView = view.findViewById(R.id.phone_box1);
-        EditText addressTextView = view.findViewById(R.id.address_box1);
-
-        Bundle args = getArguments();
-        if (args != null) {
-            nameTextView.setText(args.getString("name"));
-            itemNameTextView.setText(args.getString("itemName"));
-            phoneTextView.setText(args.getString("phone"));
-            addressTextView.setText(args.getString("address"));
-        }
-
         return view;
     }
 }
