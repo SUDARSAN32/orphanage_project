@@ -13,7 +13,7 @@ public class Record {
         this.address = address;
     }
 
-    // Getter methods for each field
+
 
     public String getName() {
         return name;

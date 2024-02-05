@@ -15,5 +15,9 @@
             android:id="@+id/settings"
             android:title="SETTINGS"
             android:icon="@drawable/ic_baseline_settings_24"/>
+    <item
+        android:id="@+id/viewpost"
+        android:title="Your posts"
+        android:icon="@drawable/ic_baseline_yourpost_24"/>
 
 </menu>

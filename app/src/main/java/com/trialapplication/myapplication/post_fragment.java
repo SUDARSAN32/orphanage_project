@@ -102,7 +102,7 @@ public class post_fragment extends Fragment {
     }
 
     private void insertContent(String content) {
-        // Insert the content into the ContentProvider
+
         ContentValues values = new ContentValues();
         values.put("content", content);
         Log.d("ShareFragment", "insertContent called with content: " + content);

@@ -52,14 +52,8 @@ public class orphanageHelper extends SQLiteOpenHelper {
     public boolean authenticateOrphanage(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + Table_name + " WHERE " + col1 + "=? AND " + col3 + "=?", new String[]{email, password});
-
         boolean result = cursor.getCount() > 0;
-
-        // Close the cursor after checking the result
         cursor.close();
-
-        // Do not close the database connection here, as it is needed for subsequent calls
-
         return result;
     }
 

@@ -19,7 +19,6 @@ public class MainActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
         e1=  (EditText) findViewById(R.id.d1);
         b1 = (Button)findViewById(R.id.button4);
-      //  manager=getFragmentManager();
 
         Bundle b = getIntent().getExtras();
         if (b != null) {

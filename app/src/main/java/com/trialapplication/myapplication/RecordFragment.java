@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-// RecordFragment.java
+
 public class RecordFragment extends Fragment {
-    // Define any necessary UI elements
+
 
     public static RecordFragment newInstance(String name, String itemName, String phone, String address) {
         RecordFragment fragment = new RecordFragment();
@@ -28,7 +28,7 @@ public class RecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment and set values from arguments
+
         View view = inflater.inflate(R.layout.fragment_record, container, false);
         EditText nameTextView = view.findViewById(R.id.name_box1);
         EditText itemNameTextView = view.findViewById(R.id.box1);

@@ -21,13 +21,13 @@ public class MyContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        // Initialization, if needed
+
         return true;
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        // Handle query operations, if needed
+
         return null;
     }
 
@@ -55,13 +55,13 @@ public class MyContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        // Handle delete operations, if needed
+
         return 0;
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        // Handle update operations, if needed
+
         return 0;
     }
 }

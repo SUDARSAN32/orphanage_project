@@ -1,13 +1,11 @@
 package com.trialapplication.myapplication;
 
 import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +14,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    EditText e1, e2;
-    Button b1;
-    TextView b2;
+
+    private EditText e1, e2;
+    private Button b1;
+    private TextView b2;
     private Broadcast_receiver networkChangeReceiver;
 
     @SuppressLint("MissingInflatedId")
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         networkChangeReceiver = new Broadcast_receiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                // Handle network change events if needed
                 showToast("Network state changed");
             }
         };
@@ -64,23 +62,23 @@ public class MainActivity extends AppCompatActivity {
                 boolean isOpauth = orphanHelper.authenticateOrphanage(username, password);
 
                 if (isUsauth) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("email1", username);
                     Intent intent = new Intent(MainActivity.this, MainActivity4.class);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
-                }
-                else if(isOpauth) {
-
+                } else if (isOpauth) {
                     Bundle bundle = new Bundle();
                     bundle.putString("email1", username);
                     view_fragment_orphanage orphanageFragment = new view_fragment_orphanage();
                     orphanageFragment.setArguments(bundle);
 
-                    Intent intent = new Intent(MainActivity.this,MainActivity_orphanage.class);
+                    Intent intent = new Intent(MainActivity.this, MainActivity_orphanage.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
-                }
-                else {
+                } else {
                     Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
                 }
             }

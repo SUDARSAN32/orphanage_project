@@ -64,8 +64,6 @@ public class view_fragment_orphanage extends Fragment {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Your logic for posting
-                // You can refresh the records after posting if needed
             }
         });
 
@@ -81,21 +79,18 @@ public class view_fragment_orphanage extends Fragment {
     }
 
     private void onLockButtonClick() {
-        // Implement logic for lock button click
     }
 
     private void sendSMS(String phoneNumber, String message) {
-        // Check if the app has the SMS permission
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             // Request the permission
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
         } else {
-            // Permission already granted, proceed with sending SMS
             sendSMSInternal(phoneNumber, message);
         }
     }
 
-    // Internal method to send SMS (called when permission is granted)
+
     private void sendSMSInternal(String phoneNumber, String message) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -111,7 +106,7 @@ public class view_fragment_orphanage extends Fragment {
         }
     }
 
-    // Fallback method using SmsManager
+
     private void sendSMSFallback(String phoneNumber, String message) {
         try {
             SmsManager smsManager = SmsManager.getDefault();
@@ -124,54 +119,57 @@ public class view_fragment_orphanage extends Fragment {
         }
     }
 
-    // Override onActivityResult to handle the result of the SMS action
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SMS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // SMS was sent successfully
                 Toast.makeText(getActivity(), "Message sent successfully", Toast.LENGTH_SHORT).show();
                 deletePostDetails();
             } else {
-                // SMS sending failed or canceled
+
                 Toast.makeText(getActivity(), "Failed to send message", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    // Override onRequestPermissionsResult to handle the result of the permission request
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == SMS_PERMISSION_REQUEST_CODE) {
-            // Check if the permission is granted
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed with sending SMS
+
                 sendSMSInternal("desired_phone_number", "desired_message");
             } else {
-                // Permission denied, show a message or take appropriate action
+
                 Toast.makeText(getActivity(), "SMS permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
     private void deletePostDetails() {
-        boolean isDeleted = dbHelper.deleteRecord(
-                e2.getText().toString(),
-                e3.getText().toString(),
-                e4.getText().toString(),
-                e5.getText().toString()
-        );
+        Log.d("ViewFragmentOrphanage", "deletePostDetails() called");
 
-        if (isDeleted) {
-            Toast.makeText(getActivity(), "Post details deleted successfully", Toast.LENGTH_SHORT).show();
-            new FetchRecordsTask().execute(); // Refresh the records after deletion
+
+        if (e4 != null) {
+            Log.d("ViewFragmentOrphanage", "Deleting post details with phone: " + e4.getText().toString());
+             String g=e4.getText().toString();
+            boolean isDeleted = dbHelper.deleteRecord(g);
+
+            if (isDeleted) {
+                Log.d("ViewFragmentOrphanage", "Post details deleted successfully");
+                Toast.makeText(getActivity(), "Post details deleted successfully", Toast.LENGTH_SHORT).show();
+                new FetchRecordsTask().execute();             } else {
+                Log.e("ViewFragmentOrphanage", "Failed to delete post details");
+                Toast.makeText(getActivity(), "Failed to delete post details", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(getActivity(), "Failed to delete post details", Toast.LENGTH_SHORT).show();
+            Log.e("ViewFragmentOrphanage", "UI element (e4) is null");
         }
     }
+
 
     private class FetchRecordsTask extends AsyncTask<Void, Void, List<Record>> {
         @Override
@@ -187,25 +185,25 @@ public class view_fragment_orphanage extends Fragment {
             for (int i = 0; i < records.size(); i++) {
                 Record record = records.get(i);
 
-                // Create TextViews dynamically for each record
+
                 TextView nameTextView = new TextView(requireContext());
                 TextView itemNameTextView = new TextView(requireContext());
                 TextView phoneTextView = new TextView(requireContext());
                 TextView addressTextView = new TextView(requireContext());
 
-                // Set data from the record to the TextViews
+
                 nameTextView.setText("Name: " + record.getName());
                 itemNameTextView.setText("Item Name: " + record.getItemName());
                 phoneTextView.setText("Phone: " + record.getPhone());
                 addressTextView.setText("Address: " + record.getAddress());
 
-                // Create Lock button dynamically
+
                 Button lockButton = new Button(requireContext());
                 lockButton.setText("Lock");
                 lockButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // Handle lock button click
+
                         Toast.makeText(getActivity(), "Lock button clicked", Toast.LENGTH_SHORT).show();
                         Bundle args = getArguments();
 
@@ -232,15 +230,15 @@ public class view_fragment_orphanage extends Fragment {
                     }
                 });
 
-                // Add some spacing between records
+
                 View spacingView = new View(requireContext());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
-                        16 // Set the desired spacing in pixels
+                        16
                 );
                 spacingView.setLayoutParams(params);
 
-                // Set top margin for the first record
+
                 if (i == 0) {
                     LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -250,7 +248,7 @@ public class view_fragment_orphanage extends Fragment {
                     nameTextView.setLayoutParams(nameParams);
                 }
 
-                // Add the TextViews, Lock button, and spacing to the main container
+
                 postContainer.addView(nameTextView);
                 postContainer.addView(itemNameTextView);
                 postContainer.addView(phoneTextView);

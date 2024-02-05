@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.navigation.NavigationView;
 import com.trialapplication.myapplication.databinding.ActivityMain4Binding;
 
@@ -23,6 +21,7 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
     private FragmentManager fragmentManager;
     private ActivityMain4Binding binding;
     private LinearLayout postContainer;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +42,6 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
             switch (item.getItemId()) {
                 case R.id.create:
                     createPostFragment();
-
-                    break;
-                case R.id.posts:
-                    openFragment(new yourpost());
                     break;
             }
             return true;
@@ -55,6 +50,12 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
         fragmentManager = getSupportFragmentManager();
         postContainer = findViewById(R.id.post_container);
         openFragment(new post_fragment());
+
+
+        Bundle args = getIntent().getExtras();
+        if (args != null) {
+            email = args.getString("email");
+        }
     }
 
     @Override
@@ -65,8 +66,14 @@ public class MainActivity4 extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
                 break;
             case R.id.settings:
-                Intent intent1 = new Intent(MainActivity4.this, settings.class);
-                startActivity(intent1);
+                break;
+            case R.id.viewpost:
+                Bundle bundle = new Bundle();
+                bundle.putString("email", email);
+
+                Intent intent2 = new Intent(MainActivity4.this, settings.class);
+                intent2.putExtras(bundle);
+                startActivity(intent2);
                 break;
         }
         binding.lay1.closeDrawer(GravityCompat.START);

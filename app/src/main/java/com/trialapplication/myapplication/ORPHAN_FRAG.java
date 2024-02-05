@@ -1,13 +1,10 @@
 package com.trialapplication.myapplication;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class ORPHAN_FRAG extends Fragment {
+    private Button b1;
+    private EditText e1, e2, e3, e4, e5;
     TextView textview;
-    Button b1;
-    EditText e1, e2, e3, e4, e5;
-    orphanageHelper orphan;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container2,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container2, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_o_r_p_h_a_n__f_r_a_g, container2, false);
         e1 = view.findViewById(R.id.editTextTextPersonName15);
         e2 = view.findViewById(R.id.editTextTextPersonName13);
@@ -35,48 +32,57 @@ public class ORPHAN_FRAG extends Fragment {
         b1 = view.findViewById(R.id.button2);
         textview = view.findViewById(R.id.fun);
 
-        // Inflate the layout for this fragment
+
         return view;
-
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        // Retrieve data from the bundle
         Bundle args = getArguments();
         if (args != null) {
-            // Get the string with key "details" from the bundle
             String details = args.getString("details");
-
-            // Set the retrieved text to the EditText
             textview.setText(details);
         }
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                // Get data from EditText fields
                 String name = e1.getText().toString();
                 String mobile = e2.getText().toString();
                 String email = e3.getText().toString();
                 String password = e4.getText().toString();
                 String oid = e5.getText().toString();
-                MyIntentservice.startActionNumberValidation(requireContext(),oid);
-              orphanageHelper orphan=new orphanageHelper(getActivity());
-                boolean isInserted =orphan.insertData(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), e4.getText().toString(), e5.getText().toString(), textview.getText().toString());
-                if (isInserted) {
-                    Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                MyIntentservice.startActionNumberValidation(requireContext(), oid);
 
+
+                if (isValidOrphanId(oid)) {
+
+                    orphanageHelper orphan = new orphanageHelper(getActivity());
+                    boolean isInserted = orphan.insertData(name, mobile, email, password, oid, textview.getText().toString());
+
+                    if (isInserted) {
+                        Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Invalid orphan ID", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+
+    private boolean isValidOrphanId(String orphanId) {
+        return "421".equals(orphanId) || "59".equals(orphanId) || "13981".equals(orphanId) || "315".equals(orphanId);
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -91,7 +97,7 @@ public class ORPHAN_FRAG extends Fragment {
         LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(resultReceiver);
     }
 
-    private Broadcast_receiver resultReceiver = new Broadcast_receiver() {
+    private BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -111,12 +117,11 @@ public class ORPHAN_FRAG extends Fragment {
     };
     private void enableButton() {
 
-        b1.setEnabled(true);
+
     }
 
     private void disableButton() {
 
-        b1.setEnabled(false);
+
     }
 }
-

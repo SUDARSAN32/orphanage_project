@@ -19,19 +19,16 @@ public class create_post extends Fragment {
         rootView = inflater.inflate(R.layout.create_post, container, false);
         fragmentContainer = rootView.findViewById(R.id.fragment_container);
 
-        // Example: Dynamically add post_fragment when this fragment is created
+
         addPostFragment();
 
         return rootView;
     }
 
     public void addPostFragment() {
-        // Inflate the post_fragment layout
+
         View postFragmentView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_post_fragment, fragmentContainer, false);
 
-        // Example: Update post_fragment UI or handle interactions if needed
-
-        // Add the post_fragment to the fragmentContainer
         fragmentContainer.addView(postFragmentView);
     }
 }

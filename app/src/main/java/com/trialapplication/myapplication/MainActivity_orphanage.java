@@ -18,7 +18,7 @@ public class MainActivity_orphanage extends AppCompatActivity {
         binding = ActivityMainOrphanageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Retrieve the bundle from MainActivity
+
         receivedBundle = getIntent().getExtras();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);

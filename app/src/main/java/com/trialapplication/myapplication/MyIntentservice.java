@@ -34,14 +34,8 @@ public class MyIntentservice extends IntentService {
     }
 
     private void handleActionNumberValidation(String phoneNumber) {
-        // TODO: Implement your number validation logic here
-        // For simplicity, let's assume the valid numbers are hardcoded
         List<String> validNumbers = Arrays.asList("421", "315", "13981", "59");
-
-        // Check if the provided phoneNumber is valid
         boolean isValid = validNumbers.contains(phoneNumber);
-
-        // Broadcast the result back to the calling component (e.g., fragment)
         sendResultToCaller(isValid);
     }
 
